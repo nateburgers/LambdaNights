@@ -1,0 +1,130 @@
+@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(http://fonts.googleapis.com/css?family=Average);
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    position: relative;
+    max-width: 768px;
+    margin: auto;
+    background: url(background.png);
+}
+
+body .title {
+    margin-top: 60px;
+    text-align: left;
+}
+
+body .title::after {
+    display: block;
+    position: absolute;
+    content: "Wednesdays @ 5pm in Davis 338A";
+    position: absolute;
+    right: 30px;
+    top: -30px;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: "Fjalla One", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 0 -1px 1px #ff2338;
+    color: white;
+    background-color: #ff4557;
+    border: 2px dashed white;
+    box-shadow: 0 3px 0 #ff2338, 0 5px 2px #222222;
+    transform: rotateZ(5deg);
+}
+
+h1, h2, h3, h4 {
+    font-family: "Fjalla One", sans-serif;
+    color: #b5f1e5;
+}
+
+h1 {
+    font-size: 100px;
+    text-shadow: 0 -2px 1px black;
+}
+
+h2 {
+    font-size: 32px;
+    text-shadow: 0 -1px 1px black;
+}
+
+h3 {
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+#table-of-contents {
+    margin-top: 60px;
+}
+
+#table-of-contents ul {
+    list-style: none;
+    margin: 10px 30px;
+}
+
+#table-of-contents ul li {
+    margin-bottom: 10px;
+}
+
+#table-of-contents ul li a {
+    color: white;
+    background-color: #ff4557;
+    font-family: "Average", serif;
+    font-size: 1em;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #ff2338;
+    padding: 3px 5px;
+    border-radius: 3px;
+    box-shadow: 0 -1px 1px #222222;
+}
+
+p a {
+    color: #ff4557;
+    text-decoration: none;
+}
+
+p {
+    font-family: "Average", serif;
+    font-size: 20px;
+    line-height: 1.5em;
+    text-shadow: 0 1px 1px black;
+    color: #747e87;
+    text-indent: 2em;
+}
+
+pre.src {
+    padding: 10px 10px;
+}
+
+.src, code {
+    color: black;
+    font-size: 14px;
+    text-shadow: none;
+    padding: 3px 5px;
+    background: url(code-background.png);
+    box-shadow: -1px -2px 1px #222222;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+.outline-2 {
+    margin-top: 60px;
+}
+
+#postamble {
+    margin-top: 90px;
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+#postamble p {
+    text-indent: 0;
+}
