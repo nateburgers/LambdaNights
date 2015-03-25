@@ -6,29 +6,118 @@
 
 * Night 1: Introduction to Standard-ML
   Before we get started please install a Standard-ML interpreter like the
-  [[http://smlnj.org][Standard-ML of New Jersey]], or alternative you can edit Standard-ML
+  [[http://smlnj.org][Standard-ML of New Jersey]], or alternatively you can edit Standard-ML
   online [[http://www.tutorialspoint.com/execute_smlnj_online.php][at this website]].
+
 ** Expressions
-  The basic units of computation in Standard-ML are Expressions.
-  Try entering some familiar math expressions into your SML interpreter
-  like the following:
-  #+BEGIN_SRC sml
-  2 + 2
-  #+END_SRC
-  Your interpreter should have spit out something like =val it : int = 4=.
-  Let's examine what it means by that.
+   *Expressions* are the basic unit of computation in *Standard-ML*. They
+   include typical mathematical expressions like =2 + 2=, =(1 + 1) / 4=, and
+   function calls like =size( "Hello World!" )=. Note that in *Standard-ML*
+   the parenthesis around a function call are not necessary, so we can write
+   =size( "Hello World!" )= simply as
+   #+BEGIN_SRC sml
+     size "Hello World!"
+   #+END_SRC
 
 ** Values
-  If we want to save the result of an expression for later, we
-  can store it in a =value=. Since 5 is such a useful number and
-  we don't want to compute it over and over, we can give the expression
-  a name to refer to later.
-  #+BEGIN_SRC sml
-    val useful_number = 2 + 2
-  #+END_SRC
-  We can now re-use this very /useful number/ in other expressions.
-  #+BEGIN_SRC sml
-    val other_number = useful_number * 2
-  #+END_SRC
+   *Values* in *Standard-ML* are a lot like *Variables* in other languages,
+   only they cannot change over time. If we want to store the result of
+   an expression in a value named =foo= then we may write
+   #+BEGIN_SRC sml
+     val foo = 2 + 2
+   #+END_SRC
+   Note that unlike many other languages there is no need to insert a semicolon
+   to denote the end of the definition of =foo=. In fact you will almost never
+   see a semicolon in idiomatic *Standard-ML*.
 
-* Night 2: To Be Continued
+   If you entered the above code into an interpreter then it is likely you
+   saw output similar to =val foo : int = 4=. This colon after the name of
+   the value denotes its /type/.
+
+** Value Types
+   All values and expressions in *Standard-ML*
+   have a type. We can be explicit about the type of a value, for instance,
+   we can say
+   #+BEGIN_SRC sml
+     val greeting : string = "Hello World!"
+   #+END_SRC
+   which declares a value named =greeting= of type =string= that contains the
+   string "Hello World". We use colons to denote that we
+   are being explicit about the type of a value.
+
+   But how does *Standard-ML* know that =foo= has type =int=? That is thanks to
+   one of its most powerful features, called /Type Inference/. *Standard-ML* is
+   actually smart enough to figure out the type of /any code you can give it/.
+
+   This means that you never have to explicitly tell *Standard-ML* what type
+   you want something to be, it will simply figure it out. However, many
+   programmers choose to explicitly state the type of value to document
+   their code.
+
+** Functions
+   *Functions* in *Standard-ML* are a lot like functions in *C* or methods in 
+   *Java*. Note that *Standard-ML* is /not/ an Object-Oriented language and
+   does not have true /objects/ or /methods/. However, I think you'll find
+   that we can get along just as well without them.
+   
+   We can define a function like this
+   #+BEGIN_SRC sml
+     fun double (x) = 2 * x
+   #+END_SRC
+   Or alternatively, without the parenthesis around =x= as
+   #+BEGIN_SRC sml
+     fun double x = 2 * x
+   #+END_SRC
+   We can also choose to be very explicit about the type of the function
+   #+BEGIN_SRC sml
+     fun double (x : int) : int = 2 * x
+   #+END_SRC
+   Which explicitly defines =double= as a function that takes an integer =x=
+   as input, and returns an integer value.
+   
+   Every one of the above 3 definitions is equivalent, and makes no difference
+   to the language which you choose to use. Note that, in the industry, programmers
+   tend to prefer the second style, which has the least amount of syntactic clutter.
+
+   the type of a /function/ from integers to integers is =int -> int=. *Standard-ML*
+   uses the infix symbol =->= to mean "function".
+
+** Pattern Matching
+
+** Function Pattern Matching
+
+** Tuples
+   Since *Standard-ML* does not have a way to define objects, we need another
+   way of packing related pieces of data together. Enter the /tuple/. Tuples
+   look like the following
+   #+BEGIN_SRC sml
+     val a_tuple = (2, 3)
+   #+END_SRC
+   which denotes a tuple containing a 2 and a 3. Tuples are /ordered/ and we have
+   ordered ways of accessing their elements, like this
+   #+BEGIN_SRC sml
+     val a_tuple = (3, 2)
+     val first_element = #1 a_tuple
+     val second_element = #2 a_tuple
+   #+END_SRC
+   after evaluating this code, =first_element= will be equal to 2, and =second_element= will
+   be equal to 3. Note that trying to evaluate =#3 a_tuple= will result in a compilation
+   failure.
+
+   The type of a tuple of 2 integers is =int * int=, where the asterisk is meant to look
+   like the cartesian product symbol from math. Tuples can have elements of different
+   types, like =("March", 3)=, which has type =string * int=.
+
+   Tuples can also have more than one element, for instance, the tuple =("March", 3, 2015)=,
+   which has type =string * int * int=, is a 3-tuple. We could easily create tuples of more
+   elements.
+
+** Algebraic Data Types
+   *Algebraic Data Types* give us a way of saying that an element of a type may take one
+   of multiple forms. We use the word =datatype= to define a new *ADT*.
+   #+BEGIN_SRC sml
+     datatype Boolean = True | False
+   #+END_SRC
+   which defines 2 values, =True= and =False=, that both belong to the =Boolean= type.
+
+* Night 2: Coming Next Week...
