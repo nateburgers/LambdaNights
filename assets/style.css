@@ -1,5 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
-@import url(http://fonts.googleapis.com/css?family=Average);
+@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
 
 * {
     margin: 0;
@@ -29,7 +30,7 @@ body .title::after {
     display: inline-block;
     padding: 5px 10px;
     border-radius: 5px;
-    font-family: "Fjalla One", sans-serif;
+    font-family: "Abel", sans-serif;
     font-weight: bold;
     font-size: 24px;
     text-shadow: 0 -1px 1px #ff2338;
@@ -41,7 +42,7 @@ body .title::after {
 }
 
 h1, h2, h3, h4 {
-    font-family: "Fjalla One", sans-serif;
+    font-family: "Abel", sans-serif;
     color: #b5f1e5;
 }
 
@@ -58,6 +59,7 @@ h2 {
 h3 {
     font-size: 24px;
     margin-top: 30px;
+    text-shadow: 0 -1px 1px black;
 }
 
 #table-of-contents {
@@ -76,7 +78,7 @@ h3 {
 #table-of-contents ul li a {
     color: white;
     background-color: #ff4557;
-    font-family: "Average", serif;
+    font-family: "Ubuntu", sans;
     font-size: 1em;
     text-decoration: none;
     text-shadow: 0 -1px 1px #ff2338;
@@ -91,28 +93,31 @@ p a {
 }
 
 p {
-    font-family: "Average", serif;
-    font-size: 20px;
+    font-family: sans;
+    font-size: "Ubuntu", sans;
     line-height: 1.5em;
     text-shadow: 0 1px 1px black;
-    color: #747e87;
+    color: #DDDDDD;
     text-indent: 2em;
+}
+
+pre.src, code {
+    font-family: "Inconsolata", serif;
+    color: #EEEEEE;
+    font-size: 20px;
 }
 
 pre.src {
     padding: 10px 10px;
+    text-shadow: 0px 1px #444444;
+    color: white;
+    background: #222222;
+    box-shadow: none;
+    border-radius: 5px;
+    
 }
 
-.src, code {
-    color: black;
-    font-size: 14px;
-    text-shadow: none;
-    padding: 3px 5px;
-    background: url(code-background.png);
-    box-shadow: -1px -2px 1px #222222;
-    border: none;
-    outline: none;
-    border-radius: 5px;
+code {
 }
 
 .outline-2 {

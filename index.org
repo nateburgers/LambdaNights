@@ -1,5 +1,6 @@
 #+AUTHOR: Nathan Burgers
 #+TITLE: Lambda Nights
+#+SUBTITLE: Learn Standard-ML by Writing a Compiler!
 #+STARTUP: showall
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/style.css"/>
 #+OPTIONS: toc:1 num:nil <:nil
