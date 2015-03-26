@@ -1,0 +1,10 @@
+body {
+    background-color: #222222;
+    color: #DDDDDD;
+}
+
+.linenum { color: #777777; }
+.keyword { color: #ff3558; }
+.string { color: #b5f1e5; }
+.number { color: #b5f1e5; }
+.type, .usertype, .classname, .symbol { color: #777777; }

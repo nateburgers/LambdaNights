@@ -1,0 +1,66 @@
+= Lambda Nights
+:toc:
+:toc-title: Nights
+:toclevels: 1
+:src_numbered: numbered
+:args: --style-css-file source-highlight.css
+
+Learn Functional Programming from the ground-up by writing a simple
+compiler, step-by-step.
+
+== Getting Started
+[hero-link]#http://www.tutorialspoint.com/execute_smlnj_online.php[Write Standard-ML Online]#
+[hero-message]#Or#
+[hero-link]#http://www.smlnj.org[Install a Standard-ML Interpreter]#
+
+== Standard-ML
+[quote, Dr. Lukasz Ziarek]
+Standard-ML is basically a Domain-Specific Language for
+writing compilers.
+
+In this tutorial series, we will write a compiler for a simple functional
+programming language, from scratch, in Standard-ML. This night focuses on
+the core language features that we will need in order to write useful
+software in ML. If you are familiar with Standard-ML, or Functional
+Programming in general, then you can probably skip this section without worry.
+
+So, how do we write programs in ML? Why, with expressions of course!
+
+=== Expressions
+Expressions are the basic building block of programs in ML. They can be typical
+mathematical expressions you may be familiar with, like `2 + 2`, or `3.0 / 4.0`.
+They can also include function calls that look like this: `size ("Hello World!")`,
+which is an expression that calls the function `size` on the value `"Hello World!"`.
+
+NOTE: In Standard-ML, the parenthesis around function arguments can be omitted,
+      so we can write `size ("Hello World!")` as `size "Hello World"`.
+
+[source,sml]
+----
+val foo : string = "yay"
+datatype t = Yay | Nay of string * string
+structure T = struct end
+signature T = sig end
+functor
+----
+
+=== Types
+
+=== Values
+
+=== Functions
+
+=== Records
+
+=== Tuples
+
+=== Pattern Matching
+
+=== Structures
+
+=== Signatures
+
+=== Functors
+
+== Defining Our Language
+Coming Next Week!
