@@ -497,9 +497,9 @@ Programming in general, then you can probably skip this section without worry.</
 <div class="paragraph"><p>So, how do we write programs in ML? Why, with expressions of course!</p></div>
 <div class="sect2">
 <h3 id="_expressions">Expressions</h3>
-<div class="paragraph"><p>Expressions are the basic building block of programs in ML. They can be typical
-mathematical expressions you may be familiar with, like <span class="monospaced">2 + 2</span>, or <span class="monospaced">3.0 / 4.0</span>.
-They can also include function calls that look like this: <span class="monospaced">size ("Hello World!")</span>,
+<div class="paragraph"><p>Expressions are the basic building block of our programs. They can be typical
+mathematical expressions like <span class="monospaced">2 + 2</span>, or <span class="monospaced">3.0 / 4.0</span>, or
+they can be function calls that look like <span class="monospaced">size ("Hello World!")</span>,
 which is an expression that calls the function <span class="monospaced">size</span> on the value <span class="monospaced">"Hello World!"</span>.</p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -510,25 +510,151 @@ which is an expression that calls the function <span class="monospaced">size</sp
       so we can write <span class="monospaced">size ("Hello World!")</span> as <span class="monospaced">size "Hello World"</span>.</td>
 </tr></table>
 </div>
+<div class="paragraph"><p>Try typing some mathematical expressions into your interpreter. If you type in
+something like <span class="monospaced">2 + 2</span>, your interpreter should say</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> foo </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> string </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">"yay"</span>
-<span style="color: #777777">    2:</span> <span style="color: #ff3558">datatype</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> Yay </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Nay </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> string </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> string</span>
-<span style="color: #777777">    3:</span> <span style="color: #ff3558">structure</span><span style="color: #DDDDDD"> T </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">struct</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">end</span>
-<span style="color: #777777">    4:</span> <span style="color: #ff3558">signature</span><span style="color: #DDDDDD"> T </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">sig</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">end</span>
-<span style="color: #777777">    5:</span> <span style="color: #ff3558">functor</span></tt></pre></div></div>
-</div>
-<div class="sect2">
-<h3 id="_types">Types</h3>
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> it </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">4</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #777777">int</span></tt></pre></div></div>
+<div class="paragraph"><p>Aha! You say, <span class="monospaced">2 + 2</span>, <strong>it</strong> is indeed equal to <span class="monospaced">4</span>! But, you ask, what does <span class="monospaced">val</span>
+mean, and what is this funny <span class="monospaced">: int</span> on the end there? Well, I&#8217;m glad you
+hypothetically asked!</p></div>
 </div>
 <div class="sect2">
 <h3 id="_values">Values</h3>
+<div class="paragraph"><p>The word <span class="monospaced">val</span> is a keyword in ML that introduces a named value. We can, for instance,
+say <span class="monospaced">val four = 4</span> to say that <span class="monospaced">four</span> is a synonym for the number <span class="monospaced">4</span>. We could
+just as well say</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> two </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">1</span><span style="color: #DDDDDD"> </span><span style="color: #777777">+</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">1</span>
+<span style="color: #777777">    2:</span> <span style="color: #DDDDDD">two </span><span style="color: #777777">+</span><span style="color: #DDDDDD"> two</span></tt></pre></div></div>
+<div class="paragraph"><p>and our interpreter will tell us</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> two </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">2</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #777777">int</span>
+<span style="color: #777777">    2:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> it </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">4</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #777777">int</span></tt></pre></div></div>
+<div class="paragraph"><p>So it looks like <span class="monospaced">val</span>'s let us give names to expressions, so we can re-use them
+later. Fantastic! Okay, let&#8217;s see what that pesky <span class="monospaced">: int</span> is all about.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_types">Types</h3>
+<div class="paragraph"><p>What Standard-ML is doing when it says <span class="monospaced">val it = 4 : int</span>, is telling you that it
+thinks the expression <strong>it</strong> belongs to is the set of <strong>integers</strong>. Similarly, if we
+entered the following into our interpreter</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #b5f1e5">"Hello World!"</span></tt></pre></div></div>
+<div class="paragraph"><p>It will tell us</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> it </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">"Hello World!"</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> string</span></tt></pre></div></div>
+<div class="paragraph"><p>Meaning that <span class="monospaced">"Hello World!"</span> belongs to the set of <strong>strings</strong>. We call the set
+that a value belongs to its <strong>type</strong>. So what Standard-ML is doing is figuring out
+the types of our values for us, automatically.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Standard-ML has a feature called <strong>Type Inference</strong>, which means that it can
+      automatically infer the type of any expression we give it. There are some
+      very smart people who figured out how to make ML do this the right way,
+      every time, no matter how complicated our expressions get.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>As programmers, we can assert what type we expect a value to be, like this</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> four_factorial </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #777777">int</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">4</span><span style="color: #DDDDDD"> </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">3</span><span style="color: #DDDDDD"> </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">2</span><span style="color: #DDDDDD"> </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">1</span></tt></pre></div></div>
+<div class="paragraph"><p>Which says, "I have a <span class="monospaced">val</span> named <span class="monospaced">four_factorial</span>. It is an <span class="monospaced">int</span>, and it is equal
+to <span class="monospaced">4 * 3 * 2 * 1</span>." Sure enough, our interpreter will tell us,</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> four_factorial </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">24</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #777777">int</span></tt></pre></div></div>
+<div class="paragraph"><p>Similarly, we could write</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> message </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> string </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">"Hello World"</span></tt></pre></div></div>
+<div class="paragraph"><p>And our interpreter will be perfectly happy with us. However, if we try to deceive
+ML, by lying about the type of a value</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> not_an_int </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #777777">int</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #b5f1e5">"Haha, You've been bamboozled, ML, for I am a String!"</span></tt></pre></div></div>
+<div class="paragraph"><p>Our interpreter will not be so easily deceived, and will let us know that it
+figured out our ruse: that <span class="monospaced">not_an_int</span> is actually a <span class="monospaced">string</span>. This is
+because Standard-ML has <strong>Strong, Static Typing</strong>. <strong>Types</strong> are <strong>Strong</strong> because
+they cannot be bullied to fit in with other types, and <strong>Static</strong> because they
+cannot change over time. The number <span class="monospaced">4</span> is an <span class="monospaced">int</span>, will always be an <span class="monospaced">int</span>,
+and can never be made to act like a <span class="monospaced">string</span>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">You may have noticed that the interpreter switches the order of the <span class="monospaced">=</span> and
+      <span class="monospaced">:</span> symbols when printing out results. This is actually invalid ML code and
+      is only used when the interpreter reports back to us. If we actually tried to
+      write <span class="monospaced">val four_factorial = 24 : int</span> ourselves, we would get a syntax error.
+      The correct syntax is <span class="monospaced">val four_factorial : int = 24</span>.</td>
+</tr></table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_functions">Functions</h3>
+<div class="paragraph"><p>So far, we have seen how to write expressions and how to store them in values, but
+in order to write programs that really <em>do</em> things instead of just <em>define</em> things,
+we&#8217;re going to need to write some functions. Functions in ML are a much like
+functions that you&#8217;ve seen in math. For instance, the way we&#8217;d write the mathematical
+function <span class="monospaced">f (x) = x</span> in ML is</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">fun</span><span style="color: #DDDDDD"> f </span><span style="color: #777777">(</span><span style="color: #DDDDDD">x</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> x</span></tt></pre></div></div>
+<div class="paragraph"><p>Where the word <span class="monospaced">fun</span> is just used to tell ML that <span class="monospaced">f</span> is not a <em>value</em>, but a
+<em>function</em>. Just like values, functions have types to. For instance, if you
+wrote the above into an interpreter, it would tell us</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> f </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">fn</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> 'a </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> 'a      </span><span style="color: #DDDDDD">(* <b>&lt;1&gt;</b> *)</span></tt></pre></div></div>
+<div class="colist arabic"><ol>
+<li>
+<p>
+this is cool
+</p>
+</li>
+</ol></div>
 </div>
 <div class="sect2">
 <h3 id="_records">Records</h3>
@@ -554,13 +680,63 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_defining_our_language">Defining Our Language</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Coming Next Week!</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">signature</span><span style="color: #DDDDDD"> CORE </span><span style="color: #777777">=</span>
+<span style="color: #777777">    2:</span> <span style="color: #ff3558">sig</span>
+<span style="color: #777777">    3:</span>
+<span style="color: #777777">    4:</span> <span style="color: #DDDDDD">    </span><span style="color: #ff3558">datatype</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> Variable </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
+<span style="color: #777777">    5:</span>
+<span style="color: #777777">    6:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Integer </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Integer</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
+<span style="color: #777777">    7:</span>
+<span style="color: #777777">    8:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Function </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
+<span style="color: #777777">    9:</span> <span style="color: #DDDDDD">                               body </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   10:</span>
+<span style="color: #777777">   11:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Application </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> function </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t</span><span style="color: #777777">,</span>
+<span style="color: #777777">   12:</span> <span style="color: #DDDDDD">                                  argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   13:</span>
+<span style="color: #777777">   14:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Primitive </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> primitive </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Primitive</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
+<span style="color: #777777">   15:</span> <span style="color: #DDDDDD">                                argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   16:</span>
+<span style="color: #777777">   17:</span> <span style="color: #DDDDDD">    </span><span style="color: #ff3558">val</span><span style="color: #DDDDDD"> replace </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> t</span>
+<span style="color: #777777">   18:</span>
+<span style="color: #777777">   19:</span> <span style="color: #DDDDDD">    </span><span style="color: #ff3558">val</span><span style="color: #DDDDDD"> evaluate </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> t</span>
+<span style="color: #777777">   20:</span>
+<span style="color: #777777">   21:</span> <span style="color: #ff3558">end</span></tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">structure</span><span style="color: #DDDDDD"> Core </span><span style="color: #777777">(</span><span style="color: #DDDDDD"> Structs </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> CORE_STRUCTS </span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> CORE </span><span style="color: #777777">=</span>
+<span style="color: #777777">    2:</span> <span style="color: #ff3558">struct</span>
+<span style="color: #777777">    3:</span>
+<span style="color: #777777">    4:</span> <span style="color: #ff3558">open</span><span style="color: #DDDDDD"> Structs</span>
+<span style="color: #777777">    5:</span>
+<span style="color: #777777">    6:</span> <span style="color: #ff3558">datatype</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> Variable </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
+<span style="color: #777777">    7:</span>
+<span style="color: #777777">    8:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Integer </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Integer</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
+<span style="color: #777777">    9:</span>
+<span style="color: #777777">   10:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Function </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
+<span style="color: #777777">   11:</span> <span style="color: #DDDDDD">                           body </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   12:</span>
+<span style="color: #777777">   13:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Application </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> function </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t</span><span style="color: #777777">,</span>
+<span style="color: #777777">   14:</span> <span style="color: #DDDDDD">                              argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   15:</span>
+<span style="color: #777777">   16:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Primitive </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> primitive </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Primitive</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
+<span style="color: #777777">   17:</span> <span style="color: #DDDDDD">                            argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   18:</span>
+<span style="color: #777777">   19:</span> <span style="color: #ff3558">end</span></tt></pre></div></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-27 00:52:46 CET
+Last updated 2015-03-27 22:02:27 CET
 </div>
 </div>
 </body>

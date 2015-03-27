@@ -4,6 +4,7 @@
 :toclevels: 1
 :src_numbered: numbered
 :args: --style-css-file source-highlight.css
+:callouts:
 
 Learn Functional Programming from the ground-up by writing a simple
 compiler, step-by-step.
@@ -27,28 +28,126 @@ Programming in general, then you can probably skip this section without worry.
 So, how do we write programs in ML? Why, with expressions of course!
 
 === Expressions
-Expressions are the basic building block of programs in ML. They can be typical
-mathematical expressions you may be familiar with, like `2 + 2`, or `3.0 / 4.0`.
-They can also include function calls that look like this: `size ("Hello World!")`,
+Expressions are the basic building block of our programs. They can be typical
+mathematical expressions like `2 + 2`, or `3.0 / 4.0`, or
+they can be function calls that look like `size ("Hello World!")`,
 which is an expression that calls the function `size` on the value `"Hello World!"`.
 
 NOTE: In Standard-ML, the parenthesis around function arguments can be omitted,
       so we can write `size ("Hello World!")` as `size "Hello World"`.
 
+Try typing some mathematical expressions into your interpreter. If you type in
+something like `2 + 2`, your interpreter should say
+
 [source,sml]
 ----
-val foo : string = "yay"
-datatype t = Yay | Nay of string * string
-structure T = struct end
-signature T = sig end
-functor
+val it = 4 : int
 ----
 
-=== Types
+Aha! You say, `2 + 2`, *it* is indeed equal to `4`! But, you ask, what does `val`
+mean, and what is this funny `: int` on the end there? Well, I'm glad you
+hypothetically asked!
 
 === Values
+The word `val` is a keyword in ML that introduces a named value. We can, for instance,
+say `val four = 4` to say that `four` is a synonym for the number `4`. We could
+just as well say
+
+[source,sml]
+----
+val two = 1 + 1
+two + two
+----
+
+and our interpreter will tell us
+[source,sml]
+----
+val two = 2 : int
+val it = 4 : int
+----
+
+So it looks like `val`'s let us give names to expressions, so we can re-use them
+later. Fantastic! Okay, let's see what that pesky `: int` is all about.
+
+=== Types
+What Standard-ML is doing when it says `val it = 4 : int`, is telling you that it
+thinks the expression *it* belongs to is the set of *integers*. Similarly, if we
+entered the following into our interpreter
+[source,sml]
+----
+"Hello World!"
+----
+
+It will tell us
+[source,sml]
+----
+val it = "Hello World!" : string
+----
+
+Meaning that `"Hello World!"` belongs to the set of *strings*. We call the set
+that a value belongs to its *type*. So what Standard-ML is doing is figuring out
+the types of our values for us, automatically.
+
+NOTE: Standard-ML has a feature called *Type Inference*, which means that it can
+      automatically infer the type of any expression we give it. There are some
+      very smart people who figured out how to make ML do this the right way,
+      every time, no matter how complicated our expressions get.
+
+As programmers, we can assert what type we expect a value to be, like this
+[source,sml]
+----
+val four_factorial : int = 4 * 3 * 2 * 1
+----
+Which says, "I have a `val` named `four_factorial`. It is an `int`, and it is equal
+to `4 * 3 * 2 * 1`." Sure enough, our interpreter will tell us,
+
+[source,sml]
+----
+val four_factorial = 24 : int
+----
+
+Similarly, we could write
+[source,sml]
+----
+val message : string = "Hello World"
+----
+And our interpreter will be perfectly happy with us. However, if we try to deceive
+ML, by lying about the type of a value
+[source,sml]
+----
+val not_an_int : int = "Haha, You've been bamboozled, ML, for I am a String!"
+----
+Our interpreter will not be so easily deceived, and will let us know that it 
+figured out our ruse: that `not_an_int` is actually a `string`. This is
+because Standard-ML has *Strong, Static Typing*. *Types* are *Strong* because
+they cannot be bullied to fit in with other types, and *Static* because they
+cannot change over time. The number `4` is an `int`, will always be an `int`,
+and can never be made to act like a `string`. 
+
+NOTE: You may have noticed that the interpreter switches the order of the `=` and
+      `:` symbols when printing out results. This is actually invalid ML code and
+      is only used when the interpreter reports back to us. If we actually tried to
+      write `val four_factorial = 24 : int` ourselves, we would get a syntax error.
+      The correct syntax is `val four_factorial : int = 24`.
 
 === Functions
+So far, we have seen how to write expressions and how to store them in values, but
+in order to write programs that really _do_ things instead of just _define_ things,
+we're going to need to write some functions. Functions in ML are a much like
+functions that you've seen in math. For instance, the way we'd write the mathematical
+function `f (x) = x` in ML is
+[source,sml]
+----
+fun f (x) = x
+----
+Where the word `fun` is just used to tell ML that `f` is not a _value_, but a
+_function_. Just like values, functions have types to. For instance, if you
+wrote the above into an interpreter, it would tell us
+[source,sml]
+----
+val f = fn : 'a -> 'a      (* <1> *)
+----
+<1> this is cool
 
 === Records
 
@@ -64,3 +163,13 @@ functor
 
 == Defining Our Language
 Coming Next Week!
+
+[source,sml]
+----
+include::core.sig[]
+----
+
+[source,sml]
+----
+include::core.fun[]
+----
