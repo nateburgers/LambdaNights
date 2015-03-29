@@ -147,7 +147,8 @@ wrote the above into an interpreter, it would tell us
 ----
 val f = fn : 'a -> 'a      (* <1> *)
 ----
-<1> this is cool
+
+Remainder Coming Soon...
 
 === Records
 
@@ -163,13 +164,3 @@ val f = fn : 'a -> 'a      (* <1> *)
 
 == Defining Our Language
 Coming Next Week!
-
-[source,sml]
-----
-include::core.sig[]
-----
-
-[source,sml]
-----
-include::core.fun[]
-----
