@@ -251,6 +251,11 @@ ul {
     margin-top: 60px;
 }
 
+iframe {
+    display: block;
+    margin: 30px auto;
+}
+
 #footer {
     margin-top: 90px;
     margin-bottom: 30px;
@@ -483,6 +488,7 @@ compiler, step-by-step.</p></div>
 <div class="sect1">
 <h2 id="_standard_ml">Standard-ML</h2>
 <div class="sectionbody">
+<iframe width="768" height="432" src="https://www.youtube.com/embed/I5EIn0Wlkkk" frameborder="0" allowfullscreen></iframe>
 <div class="quoteblock">
 <div class="content">Standard-ML is basically a Domain-Specific Language for
 writing compilers.</div>
@@ -647,14 +653,8 @@ wrote the above into an interpreter, it would tell us</p></div>
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> f </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">fn</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> 'a </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> 'a      </span><span style="color: #DDDDDD">(* <b>&lt;1&gt;</b> *)</span></tt></pre></div></div>
-<div class="colist arabic"><ol>
-<li>
-<p>
-this is cool
-</p>
-</li>
-</ol></div>
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">val</span><span style="color: #DDDDDD"> f </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">fn</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> 'a </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> 'a</span></tt></pre></div></div>
+<div class="paragraph"><p>Remainder Coming Soon&#8230;</p></div>
 </div>
 <div class="sect2">
 <h3 id="_records">Records</h3>
@@ -663,16 +663,7 @@ this is cool
 <h3 id="_tuples">Tuples</h3>
 </div>
 <div class="sect2">
-<h3 id="_pattern_matching">Pattern Matching</h3>
-</div>
-<div class="sect2">
-<h3 id="_structures">Structures</h3>
-</div>
-<div class="sect2">
-<h3 id="_signatures">Signatures</h3>
-</div>
-<div class="sect2">
-<h3 id="_functors">Functors</h3>
+<h3 id="_data_types">Data Types</h3>
 </div>
 </div>
 </div>
@@ -680,63 +671,13 @@ this is cool
 <h2 id="_defining_our_language">Defining Our Language</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Coming Next Week!</p></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">signature</span><span style="color: #DDDDDD"> CORE </span><span style="color: #777777">=</span>
-<span style="color: #777777">    2:</span> <span style="color: #ff3558">sig</span>
-<span style="color: #777777">    3:</span>
-<span style="color: #777777">    4:</span> <span style="color: #DDDDDD">    </span><span style="color: #ff3558">datatype</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> Variable </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
-<span style="color: #777777">    5:</span>
-<span style="color: #777777">    6:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Integer </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Integer</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
-<span style="color: #777777">    7:</span>
-<span style="color: #777777">    8:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Function </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
-<span style="color: #777777">    9:</span> <span style="color: #DDDDDD">                               body </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
-<span style="color: #777777">   10:</span>
-<span style="color: #777777">   11:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Application </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> function </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t</span><span style="color: #777777">,</span>
-<span style="color: #777777">   12:</span> <span style="color: #DDDDDD">                                  argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
-<span style="color: #777777">   13:</span>
-<span style="color: #777777">   14:</span> <span style="color: #DDDDDD">               </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Primitive </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> primitive </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Primitive</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
-<span style="color: #777777">   15:</span> <span style="color: #DDDDDD">                                argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
-<span style="color: #777777">   16:</span>
-<span style="color: #777777">   17:</span> <span style="color: #DDDDDD">    </span><span style="color: #ff3558">val</span><span style="color: #DDDDDD"> replace </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> t</span>
-<span style="color: #777777">   18:</span>
-<span style="color: #777777">   19:</span> <span style="color: #DDDDDD">    </span><span style="color: #ff3558">val</span><span style="color: #DDDDDD"> evaluate </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">-&gt;</span><span style="color: #DDDDDD"> t</span>
-<span style="color: #777777">   20:</span>
-<span style="color: #777777">   21:</span> <span style="color: #ff3558">end</span></tt></pre></div></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #777777">    1:</span> <span style="color: #ff3558">structure</span><span style="color: #DDDDDD"> Core </span><span style="color: #777777">(</span><span style="color: #DDDDDD"> Structs </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> CORE_STRUCTS </span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> CORE </span><span style="color: #777777">=</span>
-<span style="color: #777777">    2:</span> <span style="color: #ff3558">struct</span>
-<span style="color: #777777">    3:</span>
-<span style="color: #777777">    4:</span> <span style="color: #ff3558">open</span><span style="color: #DDDDDD"> Structs</span>
-<span style="color: #777777">    5:</span>
-<span style="color: #777777">    6:</span> <span style="color: #ff3558">datatype</span><span style="color: #DDDDDD"> t </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> Variable </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
-<span style="color: #777777">    7:</span>
-<span style="color: #777777">    8:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Integer </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Integer</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span>
-<span style="color: #777777">    9:</span>
-<span style="color: #777777">   10:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Function </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Identifier</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
-<span style="color: #777777">   11:</span> <span style="color: #DDDDDD">                           body </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
-<span style="color: #777777">   12:</span>
-<span style="color: #777777">   13:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Application </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> function </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t</span><span style="color: #777777">,</span>
-<span style="color: #777777">   14:</span> <span style="color: #DDDDDD">                              argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
-<span style="color: #777777">   15:</span>
-<span style="color: #777777">   16:</span> <span style="color: #DDDDDD">           </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Primitive </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> primitive </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> </span><span style="color: #ff3558">Primitive</span><span style="color: #777777">.</span><span style="color: #DDDDDD">t</span><span style="color: #777777">,</span>
-<span style="color: #777777">   17:</span> <span style="color: #DDDDDD">                            argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> t </span><span style="color: #DDDDDD">}</span>
-<span style="color: #777777">   18:</span>
-<span style="color: #777777">   19:</span> <span style="color: #ff3558">end</span></tt></pre></div></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-27 22:02:27 CET
+Last updated 2015-03-31 21:49:35 CEST
 </div>
 </div>
 </body>

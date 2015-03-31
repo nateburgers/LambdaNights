@@ -15,6 +15,10 @@ compiler, step-by-step.
 [hero-link]#http://www.smlnj.org[Install a Standard-ML Interpreter]#
 
 == Standard-ML
+++++
+<iframe width="768" height="432" src="https://www.youtube.com/embed/I5EIn0Wlkkk" frameborder="0" allowfullscreen></iframe>
+++++
+
 [quote, Dr. Lukasz Ziarek]
 Standard-ML is basically a Domain-Specific Language for
 writing compilers.
@@ -145,7 +149,7 @@ _function_. Just like values, functions have types to. For instance, if you
 wrote the above into an interpreter, it would tell us
 [source,sml]
 ----
-val f = fn : 'a -> 'a      (* <1> *)
+val f = fn : 'a -> 'a
 ----
 
 Remainder Coming Soon...
@@ -154,13 +158,7 @@ Remainder Coming Soon...
 
 === Tuples
 
-=== Pattern Matching
-
-=== Structures
-
-=== Signatures
-
-=== Functors
+=== Data Types
 
 == Defining Our Language
 Coming Next Week!

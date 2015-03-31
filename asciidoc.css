@@ -244,6 +244,11 @@ ul {
     margin-top: 60px;
 }
 
+iframe {
+    display: block;
+    margin: 30px auto;
+}
+
 #footer {
     margin-top: 90px;
     margin-bottom: 30px;
