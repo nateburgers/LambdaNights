@@ -174,15 +174,45 @@
 (***********************************************************************)
 
 
+(* Any expression in the Lambda Calculus can be one of 3 things:
+ * 1. A Function
+ *    Functions consist of a parameter name and a function body.
+ *    The body of a function is another expression in the 
+ *    Lambda Calculus
+ * 2. A Function Call, which we'll call an "Application" 
+ *    Function Calls consist of a function to be called,
+ *    and the argument it is being given. Both of these
+ *    are Lambda Calculus expressions
+ * 3. A Variable
+ *    Variables just consist of a name, we can use a string
+ *    to represent the name of a variable.
+ *)
 datatype LambdaCalculus = Function of string * LambdaCalculus
 			| Application of LambdaCalculus * LambdaCalculus
 			| Variable of string
 
-fun toString expression =
+(* Here's how we can construct what we call a "Syntax Tree" for a
+ * test expression. We'll use this to test our code from here on out.
+ *)
+val test_expression : LambdaCalculus = 
+    (Application 
+	 (Application 
+	      (Function ("x", Function ("y", Variable "y")), Variable "a"), Variable "b"))
+
+(* It's really useful to define a `to_string` function for most datatypes.
+ * This gives us a nicely presented view of any expression we create.
+ * This function takes a LambdaCalculus syntax tree as input, and returns
+ * a nice string representation of it.
+ *)
+fun to_string ( expression : LambdaCalculus ) : string =
   case expression of
-      Variable v => v
-    | Function (x, y) => "(lambda " ^ x ^ ". " ^ toString y ^ ")"
-    | Application (x, y) => toString x ^ " " ^ toString y
+      Variable name => name
+    | Function (parameter, body) => "(lambda " ^ parameter ^ ". " ^ toString body ^ ")"
+    | Application (function, argument) => toString function ^ " " ^ toString argument
+
+
+(* And now we can test our `to_string` function *)
+val printout_before_evaluating : string = to_string test_expression
 
 fun replace (expression, subexpression, replacement) =
   if expression = subexpression then replacement
@@ -196,28 +226,57 @@ fun replace (expression, subexpression, replacement) =
 
 fun evaluate expression =
   case expression of
-      Variable v => Variable v
-    | Function (arg, body) => 
-      Function (arg, evaluate body)
-    | Application (func, arg) => 
+
+    (* Variables evaluate to themselves *)
+      Variable name => 
+      Variable name
+
+    (* Functions also evaluate to themselves, 
+     * but we can evaluate the body of the function.
+     *)
+    | Function (argument, body) => 
+      Function (argument, evaluate body)
+
+    (* Function Application is where the meat of 
+     * evaluation takes place. 
+     *)
+    | Application (function, argument) => 
+      (* The `let ... in ... end` expression lets us
+       * define local values. The values defined between
+       * `let` and `in` can be used in the expression
+       * between `in` and `end`. They can't be used outside 
+       * of that expression. This is why they are called
+       * "local" to that expression. Values that everyone
+       * can use are called "global".
+       *)
       let
-	  val evaluated_func = evaluate func
-	  val evaluated_arg = evaluate arg
+	  val evaluated_function = evaluate function
+	  val evaluated_argument = evaluate argument
       in
-	  case evaluated_func of
-	      Variable v => Application (Variable v, evaluated_arg)
-	    | Application a => Application (Application a, evaluated_arg)
-	    | Function (arg, body) => 
-	      evaluate (replace (body, Variable arg, evaluated_arg))
+	  case evaluated_function of
+
+	    (* The Application of a Variable to anything just 
+	     * evaluates to the Application of a Variable to anything
+	     *)
+	      Variable v => 
+	      Application (Variable v, evaluated_argument)
+
+	    (* The Application of an Application to anything just
+	     * evaluates to the Application of an Application
+	     * to anything 
+	     *)
+	    | Application a => 
+	      Application (Application a, evaluated_argument)
+
+	    (* The Application of a Function to anything, is the body
+	     * of the function, with every occurrence of the parameter
+	     * replaced by the argument. We then evaluate that result
+	     * in case it can be reduced further.
+	     *)
+	    | Function (parameter, body) => 
+	      evaluate (replace (body, Variable parameter, evaluated_argument))
       end
 
 
-val omega = Function ("x", Application (Variable "x", Variable "x"))
-
-val test_expression : LambdaCalculus = 
-    (Application 
-	 (Application 
-	      (Function ("x", Function ("y", Variable "y")), Variable "a")
-	 , Variable "b"))
-
-val printout = toString (evaluate test_expression)
+(* And what it looks like after evaluation *)
+val printout_after_evaluating  = to_string (evaluate test_expression)
