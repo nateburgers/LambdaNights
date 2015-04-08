@@ -160,5 +160,14 @@ Remainder Coming Soon...
 
 === Data Types
 
-== Defining Our Language
-Coming Next Week!
+== Lambda Calculus
+Coming Soon! I'm a little behind :(
+
+== Simple Types
+Here's the source we'll be starting with tonight! 
+http://lambda-nights.com/night3/start.sml[You can also download the file here].
+
+[source,sml]
+----
+include::night3/start.sml[]
+----

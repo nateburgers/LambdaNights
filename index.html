@@ -668,16 +668,89 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 <div class="sect1">
-<h2 id="_defining_our_language">Defining Our Language</h2>
+<h2 id="_lambda_calculus">Lambda Calculus</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Coming Next Week!</p></div>
+<div class="paragraph"><p>Coming Soon! I&#8217;m a little behind :(</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_types">Simple Types</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Here&#8217;s the source we&#8217;ll be starting with tonight!
+<a href="http://lambda-nights.com/night3/start.sml">You can also download the file here</a>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #777777">    1:</span> <span style="color: #DDDDDD">(*  Lambda Night 3 : The Simply Typed Lambda Calculus</span>
+<span style="color: #777777">    2:</span> <span style="color: #DDDDDD"> *  Visit http://lambda-nights.com for more tutorials</span>
+<span style="color: #777777">    3:</span> <span style="color: #DDDDDD"> * ~Nathan Burgers</span>
+<span style="color: #777777">    4:</span> <span style="color: #DDDDDD"> *)</span>
+<span style="color: #777777">    5:</span>
+<span style="color: #777777">    6:</span> <span style="color: #DDDDDD">(********************************************************)</span>
+<span style="color: #777777">    7:</span> <span style="color: #DDDDDD">(* Map                                                  *)</span>
+<span style="color: #777777">    8:</span> <span style="color: #DDDDDD">(*                                                      *)</span>
+<span style="color: #777777">    9:</span> <span style="color: #DDDDDD">(* This is a simple, really inefficient list-based map  *)</span>
+<span style="color: #777777">   10:</span> <span style="color: #DDDDDD">(* implementation I cooked up in like 20 minutes. Gimme *)</span>
+<span style="color: #777777">   11:</span> <span style="color: #DDDDDD">(* a break guys.                                        *)</span>
+<span style="color: #777777">   12:</span> <span style="color: #DDDDDD">(********************************************************)</span>
+<span style="color: #777777">   13:</span> <span style="color: #ff3558">type</span><span style="color: #DDDDDD"> 'a Map </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">string </span><span style="color: #777777">*</span><span style="color: #DDDDDD"> 'a</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> list</span>
+<span style="color: #777777">   14:</span> <span style="color: #ff3558">exception</span><span style="color: #DDDDDD"> Not_found </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> string</span>
+<span style="color: #777777">   15:</span>
+<span style="color: #777777">   16:</span> <span style="color: #ff3558">fun</span><span style="color: #DDDDDD"> map_make </span><span style="color: #777777">()</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #777777">[]</span>
+<span style="color: #777777">   17:</span>
+<span style="color: #777777">   18:</span> <span style="color: #ff3558">fun</span><span style="color: #DDDDDD"> map_singleton </span><span style="color: #777777">(</span><span style="color: #DDDDDD">key</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #777777">[(</span><span style="color: #DDDDDD">key</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)]</span>
+<span style="color: #777777">   19:</span>
+<span style="color: #777777">   20:</span> <span style="color: #ff3558">fun</span><span style="color: #DDDDDD"> map_insert </span><span style="color: #777777">(</span><span style="color: #DDDDDD">map</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> key</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">key</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">::</span><span style="color: #DDDDDD"> map</span>
+<span style="color: #777777">   21:</span>
+<span style="color: #777777">   22:</span> <span style="color: #ff3558">fun</span><span style="color: #DDDDDD"> map_lookup </span><span style="color: #777777">(</span><span style="color: #DDDDDD">map</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> key</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span>
+<span style="color: #777777">   23:</span> <span style="color: #DDDDDD">  </span><span style="color: #ff3558">case</span><span style="color: #DDDDDD"> map </span><span style="color: #ff3558">of</span>
+<span style="color: #777777">   24:</span> <span style="color: #DDDDDD">      </span><span style="color: #777777">[]</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=&gt;</span>
+<span style="color: #777777">   25:</span> <span style="color: #DDDDDD">      </span><span style="color: #ff3558">raise</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">Not_found key</span><span style="color: #777777">)</span>
+<span style="color: #777777">   26:</span> <span style="color: #DDDDDD">    </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">key'</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">::</span><span style="color: #DDDDDD"> tail </span><span style="color: #777777">=&gt;</span>
+<span style="color: #777777">   27:</span> <span style="color: #DDDDDD">      </span><span style="color: #ff3558">if</span><span style="color: #DDDDDD"> key </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> key' </span><span style="color: #ff3558">then</span><span style="color: #DDDDDD"> value</span>
+<span style="color: #777777">   28:</span> <span style="color: #DDDDDD">      </span><span style="color: #ff3558">else</span><span style="color: #DDDDDD"> map_lookup </span><span style="color: #777777">(</span><span style="color: #DDDDDD">tail</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> key</span><span style="color: #777777">)</span>
+<span style="color: #777777">   29:</span>
+<span style="color: #777777">   30:</span> <span style="color: #ff3558">fun</span><span style="color: #DDDDDD"> map_remove </span><span style="color: #777777">(</span><span style="color: #DDDDDD">map</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> key</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=</span>
+<span style="color: #777777">   31:</span> <span style="color: #DDDDDD">  </span><span style="color: #ff3558">case</span><span style="color: #DDDDDD"> map </span><span style="color: #ff3558">of</span>
+<span style="color: #777777">   32:</span> <span style="color: #DDDDDD">      </span><span style="color: #777777">[]</span><span style="color: #DDDDDD"> </span><span style="color: #777777">=&gt;</span>
+<span style="color: #777777">   33:</span> <span style="color: #DDDDDD">      </span><span style="color: #ff3558">raise</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">Not_found key</span><span style="color: #777777">)</span>
+<span style="color: #777777">   34:</span> <span style="color: #DDDDDD">    </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">key'</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">::</span><span style="color: #DDDDDD"> tail </span><span style="color: #777777">=&gt;</span>
+<span style="color: #777777">   35:</span> <span style="color: #DDDDDD">      </span><span style="color: #ff3558">if</span><span style="color: #DDDDDD"> key </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> key' </span><span style="color: #ff3558">then</span><span style="color: #DDDDDD"> tail</span>
+<span style="color: #777777">   36:</span> <span style="color: #DDDDDD">      </span><span style="color: #ff3558">else</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">key'</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> value</span><span style="color: #777777">)</span><span style="color: #DDDDDD"> </span><span style="color: #777777">::</span><span style="color: #DDDDDD"> </span><span style="color: #777777">(</span><span style="color: #DDDDDD">map_remove </span><span style="color: #777777">(</span><span style="color: #DDDDDD">tail</span><span style="color: #777777">,</span><span style="color: #DDDDDD"> key</span><span style="color: #777777">))</span>
+<span style="color: #777777">   37:</span>
+<span style="color: #777777">   38:</span> <span style="color: #DDDDDD">(*********************************************************)</span>
+<span style="color: #777777">   39:</span> <span style="color: #DDDDDD">(* Exceptions                                            *)</span>
+<span style="color: #777777">   40:</span> <span style="color: #DDDDDD">(*                                                       *)</span>
+<span style="color: #777777">   41:</span> <span style="color: #DDDDDD">(* You can declare exceptions like this, and use the     *)</span>
+<span style="color: #777777">   42:</span> <span style="color: #DDDDDD">(* keyword `raise` to, you guessed it, raise exceptions. *)</span>
+<span style="color: #777777">   43:</span> <span style="color: #DDDDDD">(*********************************************************)</span>
+<span style="color: #777777">   44:</span>
+<span style="color: #777777">   45:</span> <span style="color: #DDDDDD">(* Here's an exception constructor that takes a `string` *)</span>
+<span style="color: #777777">   46:</span> <span style="color: #ff3558">exception</span><span style="color: #DDDDDD"> Wee_woo_wee_woo_code </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> string</span>
+<span style="color: #777777">   47:</span>
+<span style="color: #777777">   48:</span> <span style="color: #DDDDDD">(* We could use this exception like this:</span>
+<span style="color: #777777">   49:</span> <span style="color: #DDDDDD"> * `raise Wee_woo_wee_woo_code "orange"`</span>
+<span style="color: #777777">   50:</span> <span style="color: #DDDDDD"> *)</span>
+<span style="color: #777777">   51:</span>
+<span style="color: #777777">   52:</span> <span style="color: #DDDDDD">(****************************************************)</span>
+<span style="color: #777777">   53:</span> <span style="color: #DDDDDD">(* Night 3 Start                                    *)</span>
+<span style="color: #777777">   54:</span> <span style="color: #DDDDDD">(*                                                  *)</span>
+<span style="color: #777777">   55:</span> <span style="color: #DDDDDD">(* We'll start coding tonight with this as our base *)</span>
+<span style="color: #777777">   56:</span> <span style="color: #DDDDDD">(****************************************************)</span>
+<span style="color: #777777">   57:</span> <span style="color: #ff3558">datatype</span><span style="color: #DDDDDD"> Expression </span><span style="color: #777777">=</span><span style="color: #DDDDDD"> Variable </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> name </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> string </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   58:</span> <span style="color: #DDDDDD">                    </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Abstraction </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> string</span><span style="color: #777777">,</span>
+<span style="color: #777777">   59:</span> <span style="color: #DDDDDD">                                       body </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> Expression </span><span style="color: #DDDDDD">}</span>
+<span style="color: #777777">   60:</span> <span style="color: #DDDDDD">                    </span><span style="color: #777777">|</span><span style="color: #DDDDDD"> Application </span><span style="color: #ff3558">of</span><span style="color: #DDDDDD"> </span><span style="color: #DDDDDD">{</span><span style="color: #DDDDDD"> function </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> Expression</span><span style="color: #777777">,</span>
+<span style="color: #777777">   61:</span> <span style="color: #DDDDDD">                                       argument </span><span style="color: #777777">:</span><span style="color: #DDDDDD"> Expression </span><span style="color: #DDDDDD">}</span></tt></pre></div></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-31 21:49:35 CEST
+Last updated 2015-04-08 22:35:43 CEST
 </div>
 </div>
 </body>
